@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semangat Kerja, Sayang! ❤️</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&family=Pacifico&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Cursor heart -->
+  <div id="cursor-heart">💖</div>
+
+  <!-- Floating particles container -->
+  <div id="particles"></div>
+
+  <!-- ===== SCREEN: LOADING ===== -->
+  <div id="screen-loading" class="screen active">
+    <div class="loading-wrap">
+      <div class="loading-icon">🔋</div>
+      <h2 class="loading-title">Mengecas Semangat...</h2>
+      <div class="loading-bar-outer">
+        <div class="loading-bar-inner" id="loading-bar"></div>
+      </div>
+      <p class="loading-pct" id="loading-pct">0%</p>
+      <p class="loading-sub">Sabar ya sayang, sebentar lagi 💕</p>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: WELCOME ===== -->
+  <div id="screen-welcome" class="screen">
+    <div class="welcome-wrap">
+      <div class="welcome-badge">❤️ Hai Cantikuu ❤️</div>
+      <p class="welcome-msg">Aku bikin ini supaya kamu semangat kerja yaa.<br/>Klik tombol di bawah yaa 😊</p>
+      <div class="chibi-container" id="chibi-welcome">
+        <div class="chibi" id="chibi-main">🥱</div>
+        <div class="speech-bubble" id="chibi-speech">Yuk mulai hari ini dengan semangat!</div>
+      </div>
+      <div class="energy-bar-wrap">
+        <div class="energy-label">⚡ Energi Kerja <span id="energy-pct-display">0%</span></div>
+        <div class="energy-bar-outer">
+          <div class="energy-bar-inner" id="energy-bar"></div>
+        </div>
+      </div>
+      <button class="btn-primary pulse" id="btn-start">💪 Di Klik yaa</button>
+      <div class="music-btn-wrap">
+        <button class="btn-music" id="btn-music">🎵 Putar Musik</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: MINI GAME 1 — TANGKAP BINTANG ===== -->
+  <div id="screen-game1" class="screen">
+    <div class="game-wrap">
+      <div class="game-header">
+        <h2>⭐ Mini Game 1</h2>
+        <p>Tangkap 10 bintang sebelum waktu habis!</p>
+        <div class="game-stats">
+          <span>⭐ <span id="g1-count">0</span>/10</span>
+          <span>⏱️ <span id="g1-timer">30</span>s</span>
+          <span>+10 Semangat per bintang!</span>
+        </div>
+      </div>
+      <div class="game-arena" id="game1-arena"></div>
+      <div class="chibi-small" id="chibi-g1">🥱</div>
+      <div class="speech-small" id="speech-g1">Ayo tangkap bintangnya!</div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: MINI GAME 2 — TOMBOL KABUR ===== -->
+  <div id="screen-game2" class="screen">
+    <div class="game-wrap">
+      <div class="game-header">
+        <h2>😴 Mini Game 2</h2>
+        <p>Klik <strong>Semangat Kerja</strong> — tapi tombol Mager akan kabur!</p>
+        <div class="game-stats">
+          <span>✅ Klik: <span id="g2-count">0</span>/5</span>
+          <span>⏱️ <span id="g2-timer">20</span>s</span>
+        </div>
+      </div>
+      <div class="game2-arena" id="game2-arena">
+        <button class="btn-semangat" id="btn-semangat" onclick="game2Click()">😊 Semangat Kerja!</button>
+        <button class="btn-mager" id="btn-mager">😴 Pulang sekarang!</button>
+      </div>
+      <div class="chibi-small" id="chibi-g2">🙂</div>
+      <div class="speech-small" id="speech-g2">Jangan klik yang kabur ya! 😄</div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: MINI GAME 3 — KLIK HATI ===== -->
+  <div id="screen-game3" class="screen">
+    <div class="game-wrap">
+      <div class="game-header">
+        <h2>❤️ Mini Game 3</h2>
+        <p>Klik sebanyak mungkin hati dalam <strong>15 detik</strong>!</p>
+        <div class="game-stats">
+          <span>❤️ Love Energy: <span id="g3-count">0</span></span>
+          <span>⏱️ <span id="g3-timer">15</span>s</span>
+        </div>
+      </div>
+      <div class="game-arena" id="game3-arena"></div>
+      <div class="chibi-small" id="chibi-g3">😊</div>
+      <div class="speech-small" id="speech-g3">Klik semua hatinya! 💖</div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN: REWARD ===== -->
+  <div id="screen-reward" class="screen">
+    <div id="confetti-container"></div>
+    <div class="reward-wrap">
+      <div class="chibi-big" id="chibi-reward">🥰</div>
+      <h1 class="reward-title">Misi Selesai! 🎉</h1>
+      <div class="love-stats">
+        <div class="stat-item">⚡ Energi: <strong id="final-energy">100%</strong></div>
+        <div class="stat-item">❤️ Love Energy: <strong id="final-love">0</strong></div>
+      </div>
+      <button class="btn-primary glow" id="btn-open-letter">🎁 Buka Hadiah Spesial</button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: SURAT CINTA ===== -->
+  <div id="modal-letter" class="modal-overlay hidden">
+    <div class="envelope-wrap" id="envelope-wrap">
+      <div class="envelope" id="envelope">
+        <div class="envelope-flap" id="envelope-flap"></div>
+        <div class="envelope-body">
+          <div class="envelope-heart">💌</div>
+        </div>
+      </div>
+      <p class="envelope-hint">Klik amplopnya ayy untuk membuka 💕</p>
+    </div>
+    <div class="letter-wrap hidden" id="letter-wrap">
+      <div class="letter-paper">
+        <div class="letter-deco top">🌸 ✨ 💖 ✨ 🌸</div>
+        <h3 class="letter-greeting">Hai Sayangkuu reaa ❤️</h3>
+        <div class="letter-body">
+          <p>Kehadiranmu itu seperti selepas hujan;</p>
+          <p>tenang, sekaligus membawa spektrum warna<br/>yang tidak pernah gagal membuat mataku tertutup<br/></p>
+          <p>Tak perlu megah,<br/>kau cukup menjadi pelangi </p>
+          <p>di sudut langit yang hangat,<br/>indah, hingga mampu menghapus trauma badai yang baru saja melanda bumi.<br/>Meski hanya kulihat dari kejauhan,</p>
+          <p>itu sudah lebih dari cukup untuk mewarnai seluruh jiwaku.<br/>SEMANGAT YAA INGET AYY HEWAN APA YG TIGA, HEHE TIGA PULUH 🤤</p>
+          <p class="letter-sign">monokotil guy ❤️<br/><em>— Dari yang selalu ada buat kamu gk hadir langsung sih tapi.. pokonya semangat 😘</em></p>
+        </div>
+        <div class="letter-deco bottom">💕 🌸 ⭐ 🌸 💕</div>
+      </div>
+      <button class="btn-primary" id="btn-hug">🤗 Terima Pelukan Virtual!</button>
+    </div>
+  </div>
+
+  <!-- ===== MODAL: HUG ===== -->
+  <div id="modal-hug" class="modal-overlay hidden">
+    <div class="hug-wrap">
+      <div class="hug-chibi">🥰</div>
+      <h2>PELUKAN VIRTUAL DITERIMA! 🤗</h2>
+      <p>Semangat terus ya sayang!<br/>Aku selalu di sini ❤️</p>
+      <div class="hug-hearts">❤️💕💖💗💓</div>
+      <button class="btn-primary" onclick="closeHug()">💪 Nanti Kita ke Kopdes</button>
+    </div>
+  </div>
+
+  <!-- ===== EASTER EGG MODAL ===== -->
+  <div id="modal-easter" class="modal-overlay hidden">
+    <div class="easter-wrap">
+      <div class="easter-chibi jumping" id="easter-chibi">😆</div>
+      <h2>HEHE KETAHUAN ISENG 😆</h2>
+      <p>Pelukan Virtual Diterima 🤗❤️</p>
+      <button class="btn-primary" onclick="closeEaster()">Hehe okay deh 😂</button>
+    </div>
+  </div>
+
+  <!-- Music (hidden audio) -->
+  <audio id="bg-music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="app.js"></script>
+</body>
+</html>
